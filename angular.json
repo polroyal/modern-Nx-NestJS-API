@@ -1,0 +1,426 @@
+{
+  "version": 1,
+  "projects": {
+    "api": {
+      "root": "apps/api",
+      "sourceRoot": "apps/api/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/api",
+            "main": "apps/api/src/main.ts",
+            "tsConfig": "apps/api/tsconfig.app.json",
+            "assets": ["apps/api/src/assets"],
+            "tsPlugins": [
+              {
+                "name": "@nestjs/swagger/plugin",
+                "options": {
+                  "dtoFileNameSuffix": [".dto.ts", ".model.ts"]
+                }
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/src/environments/environment.ts",
+                  "with": "apps/api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api:build"
+          }
+        },
+        "serve-all": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "parallel": true,
+            "commands": ["nx serve api", "docker-compose up"]
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/api/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/api"],
+          "options": {
+            "jestConfig": "apps/api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "api-data-access-article": {
+      "root": "libs/api/data-access-article",
+      "sourceRoot": "libs/api/data-access-article/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/data-access-article/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/data-access-article"],
+          "options": {
+            "jestConfig": "libs/api/data-access-article/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "api-data-access-dtos": {
+      "root": "libs/api/data-access-dtos",
+      "sourceRoot": "libs/api/data-access-dtos/src",
+      "projectType": "library",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/api/data-access-dtos",
+            "tsConfig": "libs/api/data-access-dtos/tsconfig.lib.json",
+            "packageJson": "libs/api/data-access-dtos/package.json",
+            "main": "libs/api/data-access-dtos/src/index.ts",
+            "assets": ["libs/api/data-access-dtos/*.md"]
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/data-access-dtos/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/data-access-dtos"],
+          "options": {
+            "jestConfig": "libs/api/data-access-dtos/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "api-feature-article": {
+      "root": "libs/api/feature-article",
+      "sourceRoot": "libs/api/feature-article/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/feature-article/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/feature-article"],
+          "options": {
+            "jestConfig": "libs/api/feature-article/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "api-feature-config": {
+      "root": "libs/api/feature-config",
+      "sourceRoot": "libs/api/feature-config/src",
+      "projectType": "library",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/api/feature-config",
+            "tsConfig": "libs/api/feature-config/tsconfig.lib.json",
+            "packageJson": "libs/api/feature-config/package.json",
+            "main": "libs/api/feature-config/src/index.ts",
+            "assets": ["libs/api/feature-config/*.md"]
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/feature-config/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/feature-config"],
+          "options": {
+            "jestConfig": "libs/api/feature-config/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "api-utils-config": {
+      "root": "libs/api/utils-config",
+      "sourceRoot": "libs/api/utils-config/src",
+      "projectType": "library",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/api/utils-config",
+            "tsConfig": "libs/api/utils-config/tsconfig.lib.json",
+            "packageJson": "libs/api/utils-config/package.json",
+            "main": "libs/api/utils-config/src/index.ts",
+            "assets": ["libs/api/utils-config/*.md"]
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/utils-config/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/utils-config"],
+          "options": {
+            "jestConfig": "libs/api/utils-config/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "article-data-access-api": {
+      "projectType": "library",
+      "root": "libs/article/data-access-api",
+      "sourceRoot": "libs/article/data-access-api/src",
+      "prefix": "nestjsorg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/article/data-access-api"],
+          "options": {
+            "jestConfig": "libs/article/data-access-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/article/data-access-api/src/**/*.ts",
+              "libs/article/data-access-api/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "home-projects-nx-ionic-libs-mobile-home-feature": {
+      "projectType": "library",
+      "root": "libs/home/projects/nx-ionic/libs/mobile/home/feature",
+      "sourceRoot": "libs/home/projects/nx-ionic/libs/mobile/home/feature/src",
+      "prefix": "nestjsorg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/home/projects/nx-ionic/libs/mobile/home/feature"
+          ],
+          "options": {
+            "jestConfig": "libs/home/projects/nx-ionic/libs/mobile/home/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/home/projects/nx-ionic/libs/mobile/home/feature/src/**/*.ts",
+              "libs/home/projects/nx-ionic/libs/mobile/home/feature/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "mobile-home-feature": {
+      "projectType": "library",
+      "root": "libs/mobile/home/feature",
+      "sourceRoot": "libs/mobile/home/feature/src",
+      "prefix": "nestjsorg",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/mobile/home/feature"],
+          "options": {
+            "jestConfig": "libs/mobile/home/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/mobile/home/feature/src/**/*.ts",
+              "libs/mobile/home/feature/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "modern-api": {
+      "projectType": "application",
+      "root": "apps/modern-api",
+      "sourceRoot": "apps/modern-api/src",
+      "prefix": "nestjsorg",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/modern-api",
+            "index": "apps/modern-api/src/index.html",
+            "main": "apps/modern-api/src/main.ts",
+            "polyfills": "apps/modern-api/src/polyfills.ts",
+            "tsConfig": "apps/modern-api/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/modern-api/src/favicon.ico",
+              "apps/modern-api/src/assets"
+            ],
+            "styles": ["apps/modern-api/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/modern-api/src/environments/environment.ts",
+                  "with": "apps/modern-api/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "modern-api:build:production"
+            },
+            "development": {
+              "browserTarget": "modern-api:build:development"
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "proxyConfig": "apps/modern-api/proxy.conf.json"
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "modern-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/modern-api/src/**/*.ts",
+              "apps/modern-api/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/modern-api"],
+          "options": {
+            "jestConfig": "apps/modern-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "modern-api-e2e": {
+      "root": "apps/modern-api-e2e",
+      "sourceRoot": "apps/modern-api-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/modern-api-e2e/cypress.json",
+            "devServerTarget": "modern-api:serve:development",
+            "tsConfig": "apps/modern-api-e2e/tsconfig.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "modern-api:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/modern-api-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["modern-api"]
+    }
+  }
+}

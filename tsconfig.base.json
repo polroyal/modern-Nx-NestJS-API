@@ -1,0 +1,41 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@nestjsorg/api/data-access-article": [
+        "libs/api/data-access-article/src/index.ts"
+      ],
+      "@nestjsorg/api/data-access-dtos": [
+        "libs/api/data-access-dtos/src/index.ts"
+      ],
+      "@nestjsorg/api/feature-article": [
+        "libs/api/feature-article/src/index.ts"
+      ],
+      "@nestjsorg/api/feature-config": ["libs/api/feature-config/src/index.ts"],
+      "@nestjsorg/api/utils-config": ["libs/api/utils-config/src/index.ts"],
+      "@nestjsorg/article/data-access-api": [
+        "libs/article/data-access-api/src/index.ts"
+      ],
+      "@nestjsorg/home/projects/nx-ionic/libs/mobile/home/feature": [
+        "libs/home/projects/nx-ionic/libs/mobile/home/feature/src/index.ts"
+      ],
+      "@nestjsorg/mobile/home/feature": [
+        "libs/mobile/home/feature/src/index.ts"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
